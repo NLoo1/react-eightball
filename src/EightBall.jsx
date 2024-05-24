@@ -1,17 +1,31 @@
 import { useState } from 'react'
-import './EightBall.css'
 
+/**
+ * Component to render eight-ball simulation.
+ * @param {*} props Properties to return. Only recognizes props.results, an array of Objects {msg, color}.
+ * @returns Div to render eight-ball.
+ */
 function EightBall(props){
-    // const rand = Math.floor(Math.random() * props.results.length)
+
+    // Get message
+    const message = Math.floor(Math.random() * props.results.length)
+
+    // Based on message, get prop resutls color
+    const style = {
+        backgroundColor: props.results[message].color,
+      };
+
+    // Default 
     const [result, setResult ] = useState("Think of a question.")
     return(
         <div
         className="eight_ball"
+        style={style}
         >
             <p>{result}</p>
-            <button 
+            <button
             onClick={() => setResult(
-                props.results[Math.floor(Math.random() * props.results.length)].msg
+                props.results[message].msg
             )}> Click </button>
         </div>
     )
